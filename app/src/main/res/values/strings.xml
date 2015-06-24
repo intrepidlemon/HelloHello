@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PRG01</string>
+
+    <string name="i_speak">I speak/我说/Hablo...</string>
+    <string name="want_to_say">I want to say/我说/Hablo...</string>
+    <string name="in_what_language">in/我说/Hablo...</string>
+    <string name="translation_result">Translation Result</string>
+    <string name="action_settings">Settings</string>
+</resources>
