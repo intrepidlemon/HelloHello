@@ -1,6 +1,7 @@
 package com.iantoxi.prg01;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,11 +10,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-
 public class Prg01Activity extends Activity {
-    FromLanguageSpinnerActivity from;
+    public FromLanguageSpinnerActivity from;
+    public ToLanguageSpinnerActivity to;
+    public PhraseSpinnerActivity phrase;
 
-
+    public String[] languages;
+    public String[][] translations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,23 +26,20 @@ public class Prg01Activity extends Activity {
 
         setContentView(R.layout.activity_prg01);
 
-        Spinner spinner = (Spinner) findViewById(R.id.phrase_selector);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.english_array, R.layout.phrase_selection_spinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
         from = new FromLanguageSpinnerActivity(this);
+        to = new ToLanguageSpinnerActivity(this);
+        phrase = new PhraseSpinnerActivity(this, R.array.english, 0);
 
-        spinner = (Spinner) findViewById(R.id.to_language_selection);
-        adapter = ArrayAdapter.createFromResource(this,
-                R.array.languages, R.layout.language_selection_spinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        Resources res = getResources();
+        languages = res.getStringArray(R.array.languages);
 
-//        TextView myTextView;
-//        myTextView = (TextView) findViewById(R.id.hello_world_label);
-//        myTextView.setText("Hey there.");
+        translations = new String[languages.length][];
+
+        for (int i = 0; i < languages.length; i++) {
+            translations[i] = res.getStringArray(res.getIdentifier(languages[i], "array", getPackageName()));
+        }
+
+        changePhrase();
     }
 
     @Override
@@ -64,7 +64,18 @@ public class Prg01Activity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void changePhrase() {
+        TextView myTextView = (TextView) findViewById(R.id.translation_result);
+        myTextView.setText(translations[to.selected][phrase.selected]);
+    }
+
     public void fromLanguageChanged() {
 
+    }
+    public void toLanguageChanged(){
+        changePhrase();
+    }
+    public void phraseChanged() {
+        changePhrase();
     }
 }
