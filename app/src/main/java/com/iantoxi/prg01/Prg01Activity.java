@@ -33,11 +33,21 @@ public class Prg01Activity extends Activity {
         Resources res = getResources();
         languages = res.getStringArray(R.array.languages);
 
-        translations = new String[languages.length][];
+        translations = new String[languages.length + 1][];
 
         for (int i = 0; i < languages.length; i++) {
             translations[i] = res.getStringArray(res.getIdentifier(languages[i], "array", getPackageName()));
         }
+
+        String[] combinedTranslations = new String[translations[0].length];
+        for (int i = 0; i < translations[0].length; i ++) {
+            String word = "";
+            for (int j = 0; j < languages.length; j++) {
+                word = word + translations[j][i] + "\n";
+            }
+            combinedTranslations[i] = word;
+        }
+        translations[languages.length] = combinedTranslations;
 
         changePhrase();
     }
@@ -64,14 +74,17 @@ public class Prg01Activity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void fromLanguageChanged() {
+        int currentPhrase = phrase.selected;
+        int selectedLanguage = getResources().getIdentifier(languages[from.selected], "array", getPackageName());
+        phrase = new PhraseSpinnerActivity(this, selectedLanguage, currentPhrase);
+    }
+
     public void changePhrase() {
         TextView myTextView = (TextView) findViewById(R.id.translation_result);
         myTextView.setText(translations[to.selected][phrase.selected]);
     }
 
-    public void fromLanguageChanged() {
-
-    }
     public void toLanguageChanged(){
         changePhrase();
     }

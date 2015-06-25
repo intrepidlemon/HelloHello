@@ -15,7 +15,8 @@ public class ToLanguageSpinnerActivity extends Activity implements AdapterView.O
 
         Spinner spinner = (Spinner) context.findViewById(R.id.to_language_selection);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
-                R.array.languages_display, R.layout.language_selection_spinner);
+                R.array.to_languages_display, R.layout.language_selection_spinner);
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);

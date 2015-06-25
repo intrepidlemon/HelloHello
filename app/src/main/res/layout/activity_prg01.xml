@@ -39,8 +39,7 @@
 
             <TextView android:text="@string/translation_result"
                 android:textSize="40sp"
-                android:paddingTop="30dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="20dp"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:textColor="#ff000000"

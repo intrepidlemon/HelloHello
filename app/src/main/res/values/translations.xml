@@ -6,6 +6,13 @@
         <item>ESPAÑOL</item>
     </string-array>
 
+    <string-array name="to_languages_display">
+        <item>ENGLISH</item>
+        <item>中文</item>
+        <item>ESPAÑOL</item>
+        <item>ALL/都/TODOS</item>
+    </string-array>
+
     <string-array name="languages">
         <item>english</item>
         <item>chinese</item>
